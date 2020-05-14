@@ -1,0 +1,60 @@
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="thead-dark">
+            <th>Países</th>
+            <th>Total confirmados</th>
+            <th>Mortos</th>
+            <th>Recuperados</th>
+            <th>Data dos dados</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for info in dados %}
+        <tr>
+            <td>
+                <img src="https://www.countryflags.io/{{ info.codigo }}/shiny/64.png" style="width: 50px">
+                {{ info.pais }}
+            </td>
+            <td class="align-middle">{{ info.total_confirmados }}</td>
+            <td class="align-middle">{{ info.total_mortos }}</td>
+            <td class="align-middle">{{ info.total_recuperados }}</td>
+            <td class="align-middle">{{ info.data }}</td>
+        </tr>
+        {% endfor %}
+
+        <tr class="bg-dark" style="color: #fff;">
+            <td><strong> Dados global</strong></td>
+            <td> <strong> {{ total.total_confirmados }} </strong></td>
+            <td><strong> {{ total.total_mortos }} </strong></td>
+            <td colspan="2"><strong> {{ total.total_recuperados }} </strong></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<!-- # "Country": "Afghanistan",
+#       "CountryCode": "AF",
+#       "Slug": "afghanistan",
+#       "NewConfirmed": 18,
+#       "TotalConfirmed": 299,
+#       "NewDeaths": 1,
+#       "TotalDeaths": 7,
+#       "NewRecovered": 0,
+#       "TotalRecovered": 10,
+#       "Date": "2020-04-05T06:37:00Z" -->
+
+
+
+<!--  
+"País",
+ "Código do país",
+ "Slug",
+ "NovoConfirmado",
+ "TotalConfirmado",
+ "NovoDeaths",
+ "TotalDeaths",
+ "NewRecovered",
+ "TotalRecovered",
+ "Data"
+   -->
