@@ -1,0 +1,5 @@
+/* Fixa o thead/titulos da tabela quando esta preste a sumir, assim facilitando a leitura */
+th {
+    position: sticky;
+    top: 0;
+}

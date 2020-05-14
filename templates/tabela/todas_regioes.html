@@ -1,7 +1,7 @@
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover text-center">
     <thead>
         <tr class="thead-dark">
-            <th>Países</th>
+            <th class="text-left">Países</th>
             <th>Total confirmados</th>
             <th>Mortos</th>
             <th>Recuperados</th>
@@ -11,7 +11,7 @@
     <tbody>
         {% for info in dados %}
         <tr>
-            <td>
+            <td class="text-left align-middle">
                 <img src="https://www.countryflags.io/{{ info.codigo }}/shiny/64.png" style="width: 50px">
                 {{ info.pais }}
             </td>
@@ -23,10 +23,11 @@
         {% endfor %}
 
         <tr class="bg-dark" style="color: #fff;">
-            <td><strong> Dados global</strong></td>
+            <td class="text-left"><strong> Dados globais</strong></td>
             <td> <strong> {{ total.total_confirmados }} </strong></td>
             <td><strong> {{ total.total_mortos }} </strong></td>
-            <td colspan="2"><strong> {{ total.total_recuperados }} </strong></td>
+            <td><strong> {{ total.total_recuperados }} </strong></td>
+            <td></td>
         </tr>
     </tbody>
 </table>
