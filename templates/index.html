@@ -1,9 +1,23 @@
-
         {% include 'topo/includes.html' %}
-        {% include 'tabela/todas_regioes.html' %}
+        {% if dados == [] %}
+                {% if message[:1] == 'L'%}
+                        <div class="alert alert-danger" role="alert">
+                                <strong>{{message}}</strong>
+                        </div>
+                {% else%}
+                <div class="alert alert-danger" role="alert">
+                        <strong>{{message}}</strong>
+                </div>
+                {% endif %}
+        {% else %}
+        <div class="grafico">
+                {% include 'graficos/grafico.html' %}
+        </div>
 
+                {% include 'tabela/todas_regioes.html' %}
+                {% include 'script.html' %}
+        {% endif %}
 
-        {% include 'script.html' %}
 </body>
 
 </html>
