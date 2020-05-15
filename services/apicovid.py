@@ -5,6 +5,5 @@ def todas_regioes():
     return [r, r.status_code]
 
 def por_regiao(regiao):
-    # r = requests.get(f'https://api.covid19api.com/total/country/{regiao}')
     r = requests.get(f'https://api.covid19api.com/live/country/{regiao}/status/confirmed')
     return [r, r.status_code]
