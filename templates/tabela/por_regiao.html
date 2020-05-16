@@ -1,10 +1,16 @@
 {% include 'topo/includes.html' %}
 
+{% if message %}
+    <div class="alert alert-danger" role="alert">
+        <strong>{{message}}</strong>
+    </div>
+{% endif %}
+
 <table class="table table-bordered table-hover text-center">
     <thead>
         <tr class="thead-dark">
             <th class="text-left">Países</th>
-            {% if provincia != False %}
+            {% if provincia %}
                 <th>Cidade</th>
             {% endif %}
             <th>Total confirmados</th>
@@ -16,33 +22,29 @@
     <tbody>
 
         {% for info in dados %}
-            {% if info.provincia != '' and info.pais != '' %}
+            {% if info.provincia %}
             <tr>
                 <td class="text-left">
                     <img src="https://www.countryflags.io/{{ info.codigo }}/shiny/64.png" style="width: 50px">
                     {{ info.pais }}
                 </td>
-                <!-- {% if provincia != '' %} -->
                 <td class="align-middle">{{ info.provincia }}</td>
-                <!-- {% endif %} -->
                 <td class="align-middle">{{ info.total_confirmados }}</td>
                 <td class="align-middle">{{ info.total_mortos }}</td>
                 <td class="align-middle">{{ info.total_recuperados }}</td>
                 <td class="align-middle">{{ info.data }}</td>
             </tr>
-            {% endif %}
-           
-            {% if info.provincia == '' and info.pais != '' %}
-            <tr>
-                <td class="text-left">
-                    <img src="https://www.countryflags.io/{{ info.codigo }}/shiny/64.png" style="width: 50px">
-                    {{ info.pais }}
-                </td>
-                <td class="align-middle">{{ info.total_confirmados }}</td>
-                <td class="align-middle">{{ info.total_mortos }}</td>
-                <td class="align-middle">{{ info.total_recuperados }}</td>
-                <td class="align-middle">{{ info.data }}</td>
-            </tr>
+            {% elif dados[0]['provincia'] == info['provincia'] and dados[3]['provincia'] == info['provincia'] %}
+                <tr>
+                    <td class="text-left">
+                        <img src="https://www.countryflags.io/{{ info.codigo }}/shiny/64.png" style="width: 50px">
+                        {{ info.pais }}
+                    </td>
+                    <td class="align-middle">{{ info.total_confirmados }}</td>
+                    <td class="align-middle">{{ info.total_mortos }}</td>
+                    <td class="align-middle">{{ info.total_recuperados }}</td>
+                    <td class="align-middle">{{ info.data }}</td>
+                </tr>
             {% endif %}
         {% endfor %}
 
