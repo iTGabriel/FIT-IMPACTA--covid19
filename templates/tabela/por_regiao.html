@@ -10,7 +10,7 @@
     <thead>
         <tr class="thead-dark">
             <th class="text-left">Países</th>
-            {% if provincia %}
+            {% if dados_comProvincia %}
                 <th>Cidade</th>
             {% endif %}
             <th>Total confirmados</th>
@@ -21,8 +21,8 @@
     </thead>
     <tbody>
 
-        {% for info in dados %}
-            {% if info.provincia %}
+        {% if dados_comProvincia %}
+            {% for info in dados_comProvincia %}
             <tr>
                 <td class="text-left">
                     <img src="https://www.countryflags.io/{{ info.codigo }}/shiny/64.png" style="width: 50px">
@@ -34,7 +34,9 @@
                 <td class="align-middle">{{ info.total_recuperados }}</td>
                 <td class="align-middle">{{ info.data }}</td>
             </tr>
-            {% elif dados[0]['provincia'] == info['provincia'] and dados[3]['provincia'] == info['provincia'] %}
+            {% endfor %}
+    {% else %}
+            {% for info in dados_semProvincia %}
                 <tr>
                     <td class="text-left">
                         <img src="https://www.countryflags.io/{{ info.codigo }}/shiny/64.png" style="width: 50px">
@@ -45,8 +47,8 @@
                     <td class="align-middle">{{ info.total_recuperados }}</td>
                     <td class="align-middle">{{ info.data }}</td>
                 </tr>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+    {% endif %}
 
     </tbody>
 </table>
