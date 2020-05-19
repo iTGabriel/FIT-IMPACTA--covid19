@@ -6,9 +6,10 @@ def gera_grafico(dados_semProvincia ,dados_comProvincia):
         x_dados = []
         y_dados = []
         if dados_comProvincia:
-            pass
+            for chave in dados_semProvincia:
+                x_dados.append(chave['provincia'])
+                y_dados.append(chave['total_confirmados']) 
         else:
-           
             for chave in dados_semProvincia:
                 x_dados.append(chave['data'])
                 y_dados.append(chave['total_confirmados']) 
