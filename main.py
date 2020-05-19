@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request
 import services.apicovid as apiCovid
 import services.util as util
+import services.grafico as grafico
 
 app = Flask(__name__)
 
@@ -61,10 +62,11 @@ def regiao():
                     dados_comProvincia.append(json)
                 else:
                     dados_semProvincia.append(json)
+        grafico.gera_grafico(dados_semProvincia, dados_comProvincia)
     except:
         message = "Falha em processar a busca dos dados"
     # dados.reverse()
-    return render_template('tabela/por_regiao.html', dados_semProvincia=dados_semProvincia, dados_comProvincia=dados_comProvincia, provincia=verificador_provincia, message=message)
+    return render_template('tabela/por_regiao.html', dados_semProvincia=dados_semProvincia, dados_comProvincia=dados_comProvincia, message=message)
 
 
 app.run('127.0.0.1', 8000)
