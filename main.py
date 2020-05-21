@@ -8,17 +8,16 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     dados = []
-    dados_global = {}    
+    dados_global = {}
     message = None
     try:
-        busca = apiCovid.todas_regioes()
-        if busca[1] == 200:
-            pais = busca[0].json()
-            dados_global['total_confirmados'] = util.custom_numero(pais['Global']['TotalConfirmed'])
-            dados_global['total_mortos'] = util.custom_numero(pais['Global']['TotalDeaths'])
-            dados_global['total_recuperados'] = util.custom_numero(pais['Global']['TotalRecovered'])
+        busca = apiCovid.todas_regioes().json()
+        if busca:
+            dados_global['total_confirmados'] = util.custom_numero(busca['Global']['TotalConfirmed'])
+            dados_global['total_mortos'] = util.custom_numero(busca['Global']['TotalDeaths'])
+            dados_global['total_recuperados'] = util.custom_numero(busca['Global']['TotalRecovered'])
             
-            for chave in pais['Countries']:
+            for chave in busca['Countries']:
                 json = {
                     'pais' : chave['Country'],
                     'codigo': chave['CountryCode'],
@@ -28,13 +27,9 @@ def index():
                     'data': util.custom_data(chave['Date'])
                 }
                 dados.append(json)
-        else:
-            message = "Lista vazia por getileza atualizar a página."
-
     except:
         message = "Falha em realizar processamento por buscas dos dados"
 
-    
     return render_template('index.html', dados=dados, total=dados_global, message=message)
 
 @app.route('/regiao')
@@ -44,11 +39,9 @@ def regiao():
     dados_semProvincia = []
     try:
         regiao = request.args['regiao']
-        busca = apiCovid.por_regiao(regiao)
-        if busca[1] == 200:
-            pais = busca[0].json()
-            # dados_segurado = None
-            for chave in pais:
+        busca = apiCovid.por_regiao(regiao).json()
+        if busca:
+            for chave in busca:
                 json = {
                     'pais': chave['Country'],
                     'provincia': chave['Province'],
@@ -62,11 +55,12 @@ def regiao():
                     dados_comProvincia.append(json)
                 else:
                     dados_semProvincia.append(json)
-        grafico.gera_grafico(dados_semProvincia, dados_comProvincia)
     except:
-        message = "Falha em processar a busca dos dados"
-    # dados.reverse()
-    return render_template('tabela/por_regiao.html', dados_semProvincia=dados_semProvincia, dados_comProvincia=dados_comProvincia, message=message)
+        message = "Falha em realizar o processamento de busca dos dados"
+
+    grafico_template = grafico.gera_grafico(dados_semProvincia, dados_comProvincia)
+
+    return render_template('tabela/por_regiao.html', dados_semProvincia=dados_semProvincia, dados_comProvincia=dados_comProvincia, message=message, grafico_template=grafico_template)
 
 
 app.run('127.0.0.1', 8000)

@@ -2,16 +2,22 @@
 
 {% if message %}
     <div class="alert alert-danger" role="alert">
-        <strong>{{message}}</strong>
+        <strong>{{ message }}</strong>
     </div>
+{% else %}
+<div class="alert alert-warning" role="alert">
+    <strong>Entre as datas 29/04 a 03/05 não obtivemos resposta da fonte.</strong>
+</div>
 {% endif %}
 
-<div class="grafico">
-    {% include 'graficos/grafico.html' %}
-</div>
+
+    {% autoescape false %}
+    {{ grafico_template }}
+    {% endautoescape %}
+
 
 <table class="table table-bordered table-hover text-center">
-    <thead>
+    <thead id="table_head">
         <tr class="thead-dark">
             <th class="text-left">Países</th>
             {% if dados_comProvincia %}
@@ -53,7 +59,6 @@
                 </tr>
             {% endfor %}
     {% endif %}
-
     </tbody>
 </table>
 
