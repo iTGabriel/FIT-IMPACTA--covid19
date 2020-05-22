@@ -5,7 +5,7 @@ def custom_data(texto):
     return data_br
 
 
-# Customização do totla, tornando legibilidade mais atrativa
+# Customização do tota, tornando legibilidade mais atrativa
 def custom_numero(texto):
     texto = str(texto)
     if len(texto) == 4:
