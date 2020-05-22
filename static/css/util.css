@@ -8,11 +8,11 @@ th {
     top: 0;
 }
 
+/* Estilização do botão de atalaho de scroll (down/up) */
 .scroll{
     padding: 5px;
     width: 50px;
     height: 50px;
-    /* background-color: #0099ff; */
     border: 2px solid black;
     border-radius: 50%;
     position: fixed;
