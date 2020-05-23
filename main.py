@@ -35,6 +35,8 @@ def index():
 
     return render_template('index.html', dados=dados, total=dados_global, message=message)
 
+
+
 @app.route('/pais')
 def pais():
     message = None

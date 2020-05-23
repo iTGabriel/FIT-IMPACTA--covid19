@@ -28,7 +28,8 @@ def gera_grafico(dados_semProvincia ,dados_comProvincia):
             for chave in dados_ordenados:
                 x_dados.append(chave[0])
                 y_dados.append(chave[1])
-            fig.add_trace(go.Bar(x=x_dados ,y=y_dados))
+
+            fig.add_trace(go.Bar(x=x_dados, y=y_dados))
         
         else:
             # Quando não tem dados no array com provincia, é feito um loop no array sem provincia
@@ -39,7 +40,7 @@ def gera_grafico(dados_semProvincia ,dados_comProvincia):
         
         # Estilização do gráfico
         fig.update_layout(autosize=False, width=1100, height=600, modebar={'activecolor': 'black'},
-        margin={ 'l':0, 'r':0, 'b':80, 't':20, 'pad':1 })
+        margin={ 'l':0, 'r':0, 'b':180, 't':20, 'pad':1 })
 
         # Retorna com todo o código HTML gerado
         return fig.to_html()

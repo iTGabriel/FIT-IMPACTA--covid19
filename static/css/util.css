@@ -1,3 +1,4 @@
+/* Suaviza o scroll da página */
 html {
     scroll-behavior: smooth;
 }
@@ -41,5 +42,6 @@ th {
 }
 
 .grafico{
+    text-align: center;
     text-align: -webkit-center;
 }
